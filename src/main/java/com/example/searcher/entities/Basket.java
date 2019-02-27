@@ -1,37 +1,36 @@
 package com.example.searcher.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
+@Data
+@AllArgsConstructor
 @Entity
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id_basket;
 
-    @ManyToMany(mappedBy = "item",
+   @OneToMany(mappedBy = "basket",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    List<Item> items;
+            fetch = FetchType.LAZY)
+    List<BasketItem> basketItems;
 
-    @OneToOne(mappedBy = "pharmacy",
-            cascade = CascadeType.ALL,
+    @ManyToOne(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private Pharmacy pharmacy;
 
-    private BigDecimal cost = getCost(items);
+    private BigDecimal cost = getCost(basketItems);
 
 
-    private BigDecimal getCost(List<Item> items) {
+    private BigDecimal getCost(List<BasketItem> items) {
         BigDecimal result = items
                 .stream()
-                .map(Item::getPrice)
+                .map((basketItem) -> basketItem.getItem().getPrice())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         return result;
     }

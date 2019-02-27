@@ -14,4 +14,10 @@ public class Pharmacy {
     private Long id;
 
     private String nameOfStore;
+
+   public Pharmacy(){}
+
+   public Pharmacy(String nameOfStore) {
+       this.nameOfStore = nameOfStore;
+   }
 }
