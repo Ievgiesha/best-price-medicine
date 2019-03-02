@@ -6,9 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ItemRepository extends CrudRepository<Item,Long> {
-   // Item save(Medicine medicine, Pharmacy pharmacy, BigDecimal price) ;
-
-
-
 
 }

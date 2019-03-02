@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -23,6 +24,9 @@ public class Item {
 
     @ManyToOne
     private Pharmacy pharmacy;
+
+    @ManyToMany(mappedBy = "items", fetch = FetchType.EAGER)
+    private List<Basket> basket;
 
     private BigDecimal price;
 }

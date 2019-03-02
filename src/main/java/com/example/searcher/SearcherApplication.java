@@ -72,12 +72,12 @@ public class SearcherApplication implements CommandLineRunner {
         itemRepository.save(nasiAllecco);
 
 
-         Basket firstBasket = new Basket();
+       /*  Basket firstBasket = new Basket();
          List<Item> itemsFirst = new ArrayList<>();
          itemsFirst.add(paraZiko);
          itemsFirst.add(nasiZiko);
          firstBasket.setItems(itemsFirst);
-         firstBasket.setPharmacy(ziko);
+         firstBasket.setPharmacy(ziko);*/
 
 
 
@@ -86,7 +86,7 @@ public class SearcherApplication implements CommandLineRunner {
         System.out.println("Medicines " + medicineRepository.findAll());
         System.out.println("Pharmacy " + pharmacyRepository.findAll());
         System.out.println("Item " + itemRepository.findAll());
-        System.out.println("Basket "+firstBasket.toString());
+        //System.out.println("Basket "+firstBasket.toString());
     }
 }
 
