@@ -1,8 +1,6 @@
 package com.example.searcher.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,7 +8,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +17,14 @@ public class Pharmacy {
 
     private String nameOfStore;
 
-    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.LAZY)
     private List<Basket> baskets;
 
+    @Override
+    public String toString() {
+        return "Pharmacy{" +
+                "id=" + id +
+                ", nameOfStore='" + nameOfStore + '\'' +
+                '}';
+    }
 }
