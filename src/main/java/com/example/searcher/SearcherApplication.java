@@ -1,6 +1,7 @@
 package com.example.searcher;
 
 import com.example.searcher.entities.*;
+import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
@@ -24,6 +25,9 @@ public class SearcherApplication implements CommandLineRunner {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private BasketRepository basketRepository;
 
 
 
@@ -72,12 +76,13 @@ public class SearcherApplication implements CommandLineRunner {
         itemRepository.save(nasiAllecco);
 
 
-       /*  Basket firstBasket = new Basket();
+         Basket firstBasket = new Basket();
          List<Item> itemsFirst = new ArrayList<>();
          itemsFirst.add(paraZiko);
          itemsFirst.add(nasiZiko);
          firstBasket.setItems(itemsFirst);
-         firstBasket.setPharmacy(ziko);*/
+         firstBasket.setPharmacy(ziko);
+         basketRepository.save(firstBasket);
 
 
 
@@ -86,7 +91,7 @@ public class SearcherApplication implements CommandLineRunner {
         System.out.println("Medicines " + medicineRepository.findAll());
         System.out.println("Pharmacy " + pharmacyRepository.findAll());
         System.out.println("Item " + itemRepository.findAll());
-        //System.out.println("Basket "+firstBasket.toString());
+        System.out.println("Basket "+basketRepository.findAll());
     }
 }
 

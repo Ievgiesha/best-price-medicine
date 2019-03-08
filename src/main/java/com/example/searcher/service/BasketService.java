@@ -1,5 +1,6 @@
 package com.example.searcher.service;
 
+import com.example.searcher.entities.Basket;
 import com.example.searcher.entities.Item;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
@@ -22,7 +23,15 @@ public class BasketService {
     ItemRepository itemRepository;
 
 
+    private BigDecimal getCost(List<Item> items) {
+        BigDecimal result = items
+                .stream()
+                .map((item) -> item.getPrice())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return result;
+    }
 
+  
 
 
 
