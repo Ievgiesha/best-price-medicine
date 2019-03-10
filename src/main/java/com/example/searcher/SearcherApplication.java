@@ -5,6 +5,7 @@ import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
+import com.example.searcher.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,8 +30,8 @@ public class SearcherApplication implements CommandLineRunner {
     @Autowired
     private BasketRepository basketRepository;
 
-
-
+    @Autowired
+    ItemService itemService;
 
 
     public static void main(String[] args) {
@@ -48,10 +49,10 @@ public class SearcherApplication implements CommandLineRunner {
         medicineRepository.save(nasivin);
 
         Pharmacy ziko = new Pharmacy();
-        ziko.setNameOfStore("Ziko");
+        ziko.setName("Ziko");
         pharmacyRepository.save(ziko);
         Pharmacy allecco = new Pharmacy();
-        allecco.setNameOfStore("Allecco");
+        allecco.setName("Allecco");
         pharmacyRepository.save(allecco);
 
         Item paraZiko = new Item();
@@ -74,24 +75,37 @@ public class SearcherApplication implements CommandLineRunner {
         nasiAllecco.setPharmacy(allecco);
         nasiAllecco.setPrice(BigDecimal.valueOf(2.05));
         itemRepository.save(nasiAllecco);
+        List<String> order = new ArrayList<>();
+        order.add("Paracetamol");
+        order.add("Nasivin");
+
+        Basket firstBasket = new Basket();
+        List<Item> itemsFirst = new ArrayList<>();
+        itemsFirst.add(paraZiko);
+        itemsFirst.add(nasiZiko);
+        firstBasket.setItems(itemsFirst);
+        firstBasket.setPharmacy(ziko);
+        basketRepository.save(firstBasket);
+        Basket secondBasket = new Basket();
+        List<Item> itemSecond = new ArrayList<>();
+        itemSecond.add(paraAllecco);
+        itemSecond.add(nasiAllecco);
+        secondBasket.setItems(itemSecond);
+        secondBasket.setPharmacy(allecco);
+        basketRepository.save(secondBasket);
+
+        List<Medicine> medicineList = new ArrayList<>();
+        medicineList.add(paracetamol);
+        medicineList.add(nasivin);
 
 
-         Basket firstBasket = new Basket();
-         List<Item> itemsFirst = new ArrayList<>();
-         itemsFirst.add(paraZiko);
-         itemsFirst.add(nasiZiko);
-         firstBasket.setItems(itemsFirst);
-         firstBasket.setPharmacy(ziko);
-         basketRepository.save(firstBasket);
-
-
-
-
-
-        System.out.println("Medicines " + medicineRepository.findAll());
-        System.out.println("Pharmacy " + pharmacyRepository.findAll());
-        System.out.println("Item " + itemRepository.findAll());
-        System.out.println("Basket "+basketRepository.findAll());
+        // System.out.println("Medicines " + medicineRepository.findAll());
+        // System.out.println("Pharmacy " + pharmacyRepository.findAll());
+        // System.out.println("Item " + itemRepository.findAll());
+        // System.out.println("Basket " + basketRepository.findAll());
+        // System.out.println(itemService.findMedicine(order));
+        // System.out.println(itemService.createBasketForPharmacy(ziko,medicineList));
+        System.out.println(itemService.findCheapestBaskets(order));
     }
 }
 

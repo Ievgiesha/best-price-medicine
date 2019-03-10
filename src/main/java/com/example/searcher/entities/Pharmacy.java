@@ -15,7 +15,7 @@ public class Pharmacy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nameOfStore;
+    private String name;
 
     @OneToMany(mappedBy = "pharmacy")
     private List<Basket> baskets;
@@ -24,7 +24,7 @@ public class Pharmacy {
     public String toString() {
         return "Pharmacy{" +
                 "id=" + id +
-                ", nameOfStore='" + nameOfStore + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
