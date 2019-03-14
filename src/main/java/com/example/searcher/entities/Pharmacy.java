@@ -17,9 +17,6 @@ public class Pharmacy {
 
     private String name;
 
-    @OneToMany(mappedBy = "pharmacy")
-    private List<Basket> baskets;
-
     @Override
     public String toString() {
         return "Pharmacy{" +

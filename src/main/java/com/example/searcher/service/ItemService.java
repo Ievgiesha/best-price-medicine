@@ -43,7 +43,6 @@ public class ItemService {
     public List<Basket> findCheapestBaskets(List<String> medicineNames) throws Exception {
         List<Basket> basketList = new ArrayList<>();
         List<Medicine> medicineList = findMedicine(medicineNames);
-        int count = 0;
         for (Pharmacy pharmacy : pharmacyRepository.findAll()) {
             Basket basket = createBasketForPharmacy(pharmacy, medicineList);
             basketList.add(basket);

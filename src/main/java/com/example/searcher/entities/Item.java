@@ -24,9 +24,6 @@ public class Item {
     @ManyToOne(fetch = FetchType.EAGER)
     private Pharmacy pharmacy;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Basket> basket;
-
     private BigDecimal price;
 
     @Override
