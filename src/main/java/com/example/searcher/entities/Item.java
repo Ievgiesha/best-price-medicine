@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,8 +29,8 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
+        return "Item{" + System.lineSeparator() +
+                "      id=" + id +
                 ", medicine=" + medicine +
                 ", pharmacy=" + pharmacy +
                 ", price=" + price +

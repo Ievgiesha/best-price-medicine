@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Setter
 @Getter
+@EqualsAndHashCode
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

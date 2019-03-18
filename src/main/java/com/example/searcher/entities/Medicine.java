@@ -1,5 +1,6 @@
 package com.example.searcher.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 @Getter
 @Entity
 @ToString
+@EqualsAndHashCode
 public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

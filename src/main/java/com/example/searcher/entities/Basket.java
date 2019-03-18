@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@EqualsAndHashCode
 @Entity
 public class Basket implements Comparable<Basket>{
     @Id
@@ -28,13 +28,21 @@ public class Basket implements Comparable<Basket>{
     @JoinColumn(name = "pharmacy_id")
     private Pharmacy pharmacy;
 
-
     private BigDecimal cost;
-
-
 
     @Override
     public int compareTo(Basket basket) {
         return this.getCost().compareTo(basket.getCost());
+    }
+
+
+    @Override
+    public String toString() {
+        return "Basket{" +System.lineSeparator()+
+                "id=" + id +
+                ", items=" + items +
+                ", pharmacy=" + pharmacy +
+                ", cost=" + cost +
+                '}'+System.lineSeparator();
     }
 }
