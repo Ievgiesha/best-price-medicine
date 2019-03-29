@@ -19,6 +19,10 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    private String hrefAddress;
+
+    private String fullNameOfMedicine;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Medicine medicine;
 

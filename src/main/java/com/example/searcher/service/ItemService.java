@@ -34,6 +34,8 @@ public class ItemService {
 
     // 2. for each pharmacy call method 1. and then 3. and return cheapest (ore 3 cheapest baskets)
     public List<Basket> findCheapestBaskets(List<String> medicineNames) throws Exception {
+
+        //update medicines TODO
         List<Basket> basketList = new ArrayList<>();
         List<Medicine> medicineList = medicineService.findMedicine(medicineNames);
         for (Pharmacy pharmacy : pharmacyRepository.findAll()) {
