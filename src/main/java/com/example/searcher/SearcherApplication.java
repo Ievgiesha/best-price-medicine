@@ -18,7 +18,7 @@ import java.util.List;
 @SpringBootApplication
 public class SearcherApplication implements CommandLineRunner {
 
-    @Autowired
+   /* @Autowired
     private MedicineRepository medicineRepository;
 
     @Autowired
@@ -31,7 +31,7 @@ public class SearcherApplication implements CommandLineRunner {
     private BasketRepository basketRepository;
 
     @Autowired
-    ItemService itemService;
+    ItemService itemService;*/
 
 
     public static void main(String[] args) {
@@ -41,7 +41,7 @@ public class SearcherApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Medicine paracetamol = new Medicine();
+      /*  Medicine paracetamol = new Medicine();
         paracetamol.setName("Paracetamol");
         medicineRepository.save(paracetamol);
         Medicine nasivin = new Medicine();
@@ -105,7 +105,7 @@ public class SearcherApplication implements CommandLineRunner {
         // System.out.println("Basket " + basketRepository.findAll());
         // System.out.println(itemService.findMedicine(order));
         // System.out.println(itemService.createBasketForPharmacy(ziko,medicineList));
-        System.out.println(itemService.findCheapestBaskets(order));
+        System.out.println(itemService.findCheapestBaskets(order));*/
     }
 }
 
