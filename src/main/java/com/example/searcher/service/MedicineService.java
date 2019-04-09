@@ -32,7 +32,7 @@ public class MedicineService {
     public List<Medicine> findMedicine(List<String> medicineNames) throws Exception {
         List<Medicine> medicines = new ArrayList<>();
         for (String medicineName : medicineNames) {
-            if edicineRepository(m.findByName(medicineName).isEmpty()) {
+            if(medicineRepository.findByName(medicineName).isEmpty()) {
                 Medicine medicine = new Medicine(medicineName);
                 medicineRepository.save(medicine);
                 medicines.add(medicine);
