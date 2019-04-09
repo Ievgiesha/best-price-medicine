@@ -8,7 +8,8 @@ import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
-import com.example.searcher.service.ItemService;
+import com.example.searcher.service.BasketService;
+import com.example.searcher.service.MedicineRequestHolder;
 import com.example.searcher.service.MedicineService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,11 +28,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-public class ItemServiceTest {
+public class BasketServiceTest {
     @Mock
     private MedicineRepository medicineRepository;
     @InjectMocks
-    private ItemService itemService;
+    private BasketService basketService;
     @Mock
     ItemRepository itemRepository;
     @Mock
@@ -62,7 +63,7 @@ public class ItemServiceTest {
 
         when(itemRepository.findByMedicineAndPharmacy(paracetamol, ziko)).thenReturn(Optional.of(item));
         //when
-        Optional<Basket> result = itemService.createBasketForPharmacy(ziko, listMedicine);
+        Optional<Basket> result = basketService.createBasketForPharmacy(ziko, listMedicine);
         //then
         assertSame(result, basket);
 
@@ -71,6 +72,7 @@ public class ItemServiceTest {
     @Test
     public void findCheapestBasketTest() throws Exception {
         //given
+        MedicineRequestHolder medicineRequestHolder = new MedicineRequestHolder();
         List<String> stringList = new ArrayList<>();
         stringList.add("Paracetamol");
         stringList.add("Nasivin");
@@ -102,8 +104,8 @@ public class ItemServiceTest {
         when(basketRepository.save(basket)).thenReturn(basket);
         when(itemRepository.findByMedicineAndPharmacy(paracetamol,ziko)).thenReturn(Optional.of(item));
         //when
-        List<Basket> result = new ArrayList<>();
-        result = itemService.findCheapestBaskets(stringList);
+        medicineRequestHolder.setMedicineNames(stringList);
+       List<Basket> result = basketService.findCheapestBaskets(medicineRequestHolder);
         //then
         assertEquals(1, result.size());
         assertEquals(basket, result.get(0));

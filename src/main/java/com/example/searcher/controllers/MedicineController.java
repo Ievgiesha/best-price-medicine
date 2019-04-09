@@ -1,7 +1,9 @@
 package com.example.searcher.controllers;
 
 import com.example.searcher.entities.Item;
+import com.example.searcher.service.MedicineRequestHolder;
 import com.example.searcher.service.MedicineService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +18,11 @@ public class MedicineController {
         this.medicineService = medicineService;
     }
 
-    @PostMapping(path = "/fullNameOfMedicine")
-    public List<Item> findListItemsForMedicine(@RequestBody String fullNameOfMedicine) throws Exception {
-        return medicineService.findItemForMedicine(fullNameOfMedicine);
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE},
+            path = "/fullNameOfMedicine")
+    public List<Item> findListItemsForMedicine(@RequestBody MedicineRequestHolder medicineRequestHolder) throws Exception {
+        return medicineService.findItemForMedicine(medicineRequestHolder);
     }
 
     @PostMapping

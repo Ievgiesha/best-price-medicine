@@ -1,19 +1,8 @@
 package com.example.searcher;
 
-import com.example.searcher.entities.*;
-import com.example.searcher.repository.BasketRepository;
-import com.example.searcher.repository.ItemRepository;
-import com.example.searcher.repository.MedicineRepository;
-import com.example.searcher.repository.PharmacyRepository;
-import com.example.searcher.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 public class SearcherApplication implements CommandLineRunner {

@@ -1,14 +1,8 @@
 package com.example.searcher.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -21,4 +15,11 @@ public class Medicine {
     private Long id;
 
     private String name;
+
+    public Medicine(String name) {
+        this.name = name;
+    }
+
+    public Medicine() {
+    }
 }
