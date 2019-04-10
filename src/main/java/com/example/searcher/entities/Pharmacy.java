@@ -8,23 +8,21 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
 @Setter
+@Getter
+@EqualsAndHashCode
 public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String nameOfStore;
-
-    @OneToMany(mappedBy = "pharmacy", fetch = FetchType.LAZY)
-    private List<Basket> baskets;
+    private String name;
 
     @Override
     public String toString() {
         return "Pharmacy{" +
                 "id=" + id +
-                ", nameOfStore='" + nameOfStore + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

@@ -4,15 +4,16 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
-@Getter
 @Setter
-@ToString
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Entity
-public class Basket {
+public class Basket implements Comparable<Basket>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,15 +28,21 @@ public class Basket {
     @JoinColumn(name = "pharmacy_id")
     private Pharmacy pharmacy;
 
-    private BigDecimal cost = getCost();
+    private BigDecimal cost;
 
-    private BigDecimal getCost(List<Item> items) { //TODO move to service
-        BigDecimal result = items
-                .stream()
-                .map((item) -> item.getPrice())
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        return result;
+    @Override
+    public int compareTo(Basket basket) {
+        return this.getCost().compareTo(basket.getCost());
     }
 
 
+    @Override
+    public String toString() {
+        return "Basket{" +System.lineSeparator()+
+                "id=" + id +
+                ", items=" + items +
+                ", pharmacy=" + pharmacy +
+                ", cost=" + cost +
+                '}'+System.lineSeparator();
+    }
 }

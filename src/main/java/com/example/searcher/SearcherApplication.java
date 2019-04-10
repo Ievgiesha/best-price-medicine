@@ -5,6 +5,7 @@ import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
+import com.example.searcher.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +18,7 @@ import java.util.List;
 @SpringBootApplication
 public class SearcherApplication implements CommandLineRunner {
 
-    @Autowired
+   /* @Autowired
     private MedicineRepository medicineRepository;
 
     @Autowired
@@ -29,6 +30,9 @@ public class SearcherApplication implements CommandLineRunner {
     @Autowired
     private BasketRepository basketRepository;
 
+    @Autowired
+    ItemService itemService;*/
+
 
     public static void main(String[] args) {
         SpringApplication.run(SearcherApplication.class, args);
@@ -37,7 +41,7 @@ public class SearcherApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Medicine paracetamol = new Medicine();
+      /*  Medicine paracetamol = new Medicine();
         paracetamol.setName("Paracetamol");
         medicineRepository.save(paracetamol);
         Medicine nasivin = new Medicine();
@@ -45,10 +49,10 @@ public class SearcherApplication implements CommandLineRunner {
         medicineRepository.save(nasivin);
 
         Pharmacy ziko = new Pharmacy();
-        ziko.setNameOfStore("Ziko");
+        ziko.setName("Ziko");
         pharmacyRepository.save(ziko);
         Pharmacy allecco = new Pharmacy();
-        allecco.setNameOfStore("Allecco");
+        allecco.setName("Allecco");
         pharmacyRepository.save(allecco);
 
         Item paraZiko = new Item();
@@ -73,19 +77,21 @@ public class SearcherApplication implements CommandLineRunner {
         itemRepository.save(nasiAllecco);
 
 
-        Basket firstBasket = new Basket();
-        List<Item> itemsFirst = new ArrayList<>();
-        itemsFirst.add(paraZiko);
-        itemsFirst.add(nasiZiko);
-        firstBasket.setItems(itemsFirst);
-        firstBasket.setPharmacy(ziko);
-        firstBasket.setCost(firstBasket.getCost());
-        basketRepository.save(firstBasket);
+       /*  Basket firstBasket = new Basket();
+         List<Item> itemsFirst = new ArrayList<>();
+         itemsFirst.add(paraZiko);
+         itemsFirst.add(nasiZiko);
+         firstBasket.setItems(itemsFirst);
+         firstBasket.setPharmacy(ziko);*/
+
+
+
+
 
         System.out.println("Medicines " + medicineRepository.findAll());
         System.out.println("Pharmacy " + pharmacyRepository.findAll());
         System.out.println("Item " + itemRepository.findAll());
-        System.out.println("Basket "+basketRepository.findAll());
+        //System.out.println("Basket "+firstBasket.toString());
     }
 }
 

@@ -8,31 +8,33 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EqualsAndHashCode
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne
+    private String hrefAddress;
+
+    private String fullNameOfMedicine;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Medicine medicine;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pharmacy pharmacy;
-
-    @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
-    private List<Basket> basket;
 
     private BigDecimal price;
 
     @Override
     public String toString() {
-        return "Item{" +
-                "id=" + id +
+        return "Item{" + System.lineSeparator() +
+                "      id=" + id +
                 ", medicine=" + medicine +
                 ", pharmacy=" + pharmacy +
                 ", price=" + price +
