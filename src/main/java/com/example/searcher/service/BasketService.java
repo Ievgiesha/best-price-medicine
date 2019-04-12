@@ -8,6 +8,7 @@ import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class ItemService {
+public class BasketService {
 
     @Autowired
     MedicineRepository medicineRepository;
@@ -33,9 +34,8 @@ public class ItemService {
 
 
     // 2. for each pharmacy call method 1. and then 3. and return cheapest (ore 3 cheapest baskets)
-    public List<Basket> findCheapestBaskets(List<String> medicineNames) throws Exception {
-
-        //update medicines TODO
+    public List<Basket> findCheapestBaskets(MedicineRequestHolder medicineRequestHolder) throws Exception {
+        List<String> medicineNames = medicineRequestHolder.getMedicineNames();
         List<Basket> basketList = new ArrayList<>();
         List<Medicine> medicineList = medicineService.findMedicine(medicineNames);
         for (Pharmacy pharmacy : pharmacyRepository.findAll()) {
@@ -64,10 +64,13 @@ public class ItemService {
                 basket.setPharmacy(pharmacy);
                 basket.setCost(getCost(itemList));
                 basketRepository.save(basket);
+            } else {
+                System.out.println("Error...., in itemRepository not item with Pharmacy - "+pharmacy+"and Medicine - "+medicine);
+                break;
             }
         }
         return Optional.of(basket);
-    }
+}
 
     private BigDecimal getCost(List<Item> items) {
         BigDecimal result = items
@@ -76,6 +79,4 @@ public class ItemService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         return result;
     }
-
-
 }

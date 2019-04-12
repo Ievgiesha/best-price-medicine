@@ -19,14 +19,10 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String hrefAddress;
-
-    private String fullNameOfMedicine;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Medicine medicine;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Pharmacy pharmacy;
 
     private BigDecimal price;
