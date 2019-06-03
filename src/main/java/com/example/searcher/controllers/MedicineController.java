@@ -18,9 +18,7 @@ public class MedicineController {
         this.medicineService = medicineService;
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE},
-            path = "/fullNameOfMedicine")
+    @PostMapping(path = "/fullNameOfMedicine")
     public List<Item> findListItemsForMedicine(@RequestBody MedicineRequestHolder medicineRequestHolder) throws Exception {
         return medicineService.findItemForMedicine(medicineRequestHolder);
     }

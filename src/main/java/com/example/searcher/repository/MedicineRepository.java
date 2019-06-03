@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface MedicineRepository extends CrudRepository<Medicine, Long> {
-     public Optional<Medicine> findByName(String name);
+    Optional<Medicine> findByName(String name);
 }

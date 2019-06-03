@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ItemRepository extends CrudRepository<Item,Long> {
-    public List<Item> findByMedicine(Medicine medicine);
-  public Optional<Item>  findByMedicineAndPharmacy(Medicine medicine, Pharmacy pharmacy);
+public interface ItemRepository extends CrudRepository<Item, Long> {
+    List<Item> findByMedicine(Medicine medicine);
+
+    Optional<Item> findByMedicineAndPharmacy(Medicine medicine, Pharmacy pharmacy);
 }

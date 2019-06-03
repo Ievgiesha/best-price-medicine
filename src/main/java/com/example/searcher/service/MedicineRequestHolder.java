@@ -18,7 +18,8 @@ public class MedicineRequestHolder {
         this.simpleName = simpleName;
         this.fullNameOfMedicine = fullNameOfMedicine;
     }
-    public MedicineRequestHolder(List<String> medicineNames){
+
+    public MedicineRequestHolder(List<String> medicineNames) {
         this.medicineNames = medicineNames;
     }
 
@@ -29,17 +30,11 @@ public class MedicineRequestHolder {
         return simpleName;
     }
 
-    public void setSimpleName(String simpleName) {
-        this.simpleName = simpleName;
-    }
 
     public String getFullNameOfMedicine() {
         return fullNameOfMedicine;
     }
 
-    public void setFullNameOfMedicine(String fullNameOfMedicine) {
-        this.fullNameOfMedicine = fullNameOfMedicine;
-    }
 
     public List<String> getMedicineNames() {
         return medicineNames;

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,18 +14,15 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Basket implements Comparable<Basket>{
+public class Basket implements Comparable<Basket> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "basket_item",
-            joinColumns = @JoinColumn(name = "basket_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id", referencedColumnName = "id"))
+    @OneToMany(mappedBy = "basket")
     private List<Item> items;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pharmacy_id")
     private Pharmacy pharmacy;
 
@@ -35,14 +33,13 @@ public class Basket implements Comparable<Basket>{
         return this.getCost().compareTo(basket.getCost());
     }
 
-
     @Override
     public String toString() {
-        return "Basket{" +System.lineSeparator()+
+        return "Basket{" + System.lineSeparator() +
                 "id=" + id +
                 ", items=" + items +
                 ", pharmacy=" + pharmacy +
                 ", cost=" + cost +
-                '}'+System.lineSeparator();
+                '}' + System.lineSeparator();
     }
 }

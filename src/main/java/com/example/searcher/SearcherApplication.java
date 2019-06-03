@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SearcherApplication implements CommandLineRunner {
-
+    public final static boolean DEBUG=true;
    /* @Autowired
     private MedicineRepository medicineRepository;
 
@@ -23,9 +23,7 @@ public class SearcherApplication implements CommandLineRunner {
     ItemService itemService;*/
 
 
-    public static void main(String[] args) {
-        SpringApplication.run(SearcherApplication.class, args);
-    }
+    public static void main(String[] args) { SpringApplication.run(SearcherApplication.class, args); }
 
     @Override
     public void run(String... args) throws Exception {
@@ -77,9 +75,9 @@ public class SearcherApplication implements CommandLineRunner {
 
 
 
-        System.out.println("Medicines " + medicineRepository.findAll());
+      /*  System.out.println("Medicines " + medicineRepository.findAll());
         System.out.println("Pharmacy " + pharmacyRepository.findAll());
-        System.out.println("Item " + itemRepository.findAll());
+        System.out.println("Item " + itemRepository.findAll()); */
         //System.out.println("Basket "+firstBasket.toString());
     }
 }

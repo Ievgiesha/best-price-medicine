@@ -8,7 +8,6 @@ import com.example.searcher.repository.BasketRepository;
 import com.example.searcher.repository.ItemRepository;
 import com.example.searcher.repository.MedicineRepository;
 import com.example.searcher.repository.PharmacyRepository;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +29,8 @@ public class BasketService {
     BasketRepository basketRepository;
     @Autowired
     MedicineService medicineService;
+
     // 1. find medicine for every string provided
-
-
     // 2. for each pharmacy call method 1. and then 3. and return cheapest (ore 3 cheapest baskets)
     public List<Basket> findCheapestBaskets(MedicineRequestHolder medicineRequestHolder) throws Exception {
         List<String> medicineNames = medicineRequestHolder.getMedicineNames();
@@ -41,13 +39,6 @@ public class BasketService {
         for (Pharmacy pharmacy : pharmacyRepository.findAll()) {
             Optional<Basket> maybeBasket = createBasketForPharmacy(pharmacy, medicineList);
             maybeBasket.ifPresent(basketList::add);
-        }
-
-        for (int i = 0; i < basketList.size(); i++) {
-            for (int j = 0; j < basketList.get(i).getItems().size(); j++) {
-                BigDecimal temp = basketList.get(i).getCost();
-                basketList.get(i).setCost(temp);
-            }
         }
         return basketList.stream().sorted((b1, b2) -> b1.compareTo(b2)).collect(Collectors.toList());
     }
@@ -60,19 +51,19 @@ public class BasketService {
             Optional<Item> item = itemRepository.findByMedicineAndPharmacy(medicine, pharmacy);
             if (item.isPresent()) {
                 itemList.add(item.get());
-                basket.setItems(itemList);
-                basket.setPharmacy(pharmacy);
-                basket.setCost(getCost(itemList));
-                basketRepository.save(basket);
             } else {
-                System.out.println("Error...., in itemRepository not item with Pharmacy - "+pharmacy+"and Medicine - "+medicine);
-                break;
+                System.out.println("Error...., in itemRepository not item with Pharmacy - " + pharmacy + "and Medicine - " + medicine);
+                return Optional.empty();
             }
         }
+        basket.setItems(itemList);
+        basket.setPharmacy(pharmacy);
+        basket.setCost(calculateItemsCost(itemList));
+        basketRepository.save(basket);
         return Optional.of(basket);
-}
+    }
 
-    private BigDecimal getCost(List<Item> items) {
+    private BigDecimal calculateItemsCost(List<Item> items) {
         BigDecimal result = items
                 .stream()
                 .map((item) -> item.getPrice())
